@@ -3,770 +3,830 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Okechukwu Mitchell Ogbuabor — .NET Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Mitchell Ogbuabor — ASP.NET Core Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
 
-  :root {
-    --ink: #0d1117;
-    --ink-soft: #3a3d42;
-    --ink-muted: #6b7280;
-    --surface: #f9f8f4;
-    --surface-2: #f0ede6;
-    --accent: #1a6b3c;
-    --accent-light: #e8f5ee;
-    --accent-mid: #2d9b5a;
-    --gold: #c9963a;
-    --gold-light: #fdf4e3;
-    --line: rgba(0,0,0,0.08);
-    --font-display: 'DM Serif Display', Georgia, serif;
-    --font-body: 'Outfit', sans-serif;
-    --font-mono: 'DM Mono', monospace;
-  }
+:root{
+  --bg:#f6f4ef;
+  --bg2:#eeeae0;
+  --ink:#111310;
+  --ink-soft:#3d3d38;
+  --ink-muted:#7a7a72;
+  --white:#ffffff;
+  --green:#1b5e35;
+  --green-mid:#2a8c4e;
+  --green-light:#e4f2ea;
+  --green-glow:rgba(27,94,53,0.12);
+  --amber:#b8620a;
+  --amber-light:#fdf0e3;
+  --blue:#0f3b6e;
+  --blue-light:#e3edf8;
+  --purple:#3d1a6e;
+  --purple-light:#ede3f8;
+  --teal:#0a5c52;
+  --teal-light:#e3f2f0;
+  --line:rgba(17,19,16,0.1);
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Syne',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --radius:1rem;
+}
 
-  html { scroll-behavior: smooth; }
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;overflow-x:hidden}
 
-  body {
-    font-family: var(--font-body);
-    background: var(--surface);
-    color: var(--ink);
-    line-height: 1.6;
-    font-weight: 400;
-    overflow-x: hidden;
-  }
+/* ─── NOISE TEXTURE OVERLAY ─── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.6;
+}
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.1rem 3rem;
-    background: rgba(249,248,244,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--line);
-  }
-  .nav-logo {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--accent);
-    letter-spacing: 0.04em;
-  }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    text-decoration: none;
-    color: var(--ink-muted);
-    font-size: 0.875rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--accent); }
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 3rem;
+  background:rgba(246,244,239,0.88);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.nav-logo{font-family:var(--mono);font-size:.78rem;color:var(--green);letter-spacing:.06em;font-weight:500}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--ink-muted);font-size:.82rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--green)}
+.nav-cta{
+  background:var(--ink);color:var(--bg);
+  padding:.55rem 1.4rem;border-radius:.4rem;
+  font-size:.8rem;font-weight:700;text-decoration:none;letter-spacing:.03em;
+  transition:all .2s;
+}
+.nav-cta:hover{background:var(--green)}
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 3rem;
-    padding-top: 5rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    align-items: center;
-    gap: 4rem;
-  }
-  .hero-text { padding-top: 2rem; }
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: var(--accent-light);
-    color: var(--accent);
-    border: 1px solid rgba(26,107,60,0.2);
-    border-radius: 2rem;
-    padding: 0.35rem 1rem;
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 1.8rem;
-  }
-  .hero-tag::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent-mid);
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-  .hero h1 {
-    font-family: var(--font-display);
-    font-size: clamp(2.8rem, 5vw, 4.2rem);
-    line-height: 1.1;
-    color: var(--ink);
-    margin-bottom: 1.4rem;
-  }
-  .hero h1 em {
-    font-style: italic;
-    color: var(--accent);
-  }
-  .hero-sub {
-    font-size: 1.05rem;
-    color: var(--ink-soft);
-    line-height: 1.75;
-    max-width: 480px;
-    margin-bottom: 2.5rem;
-  }
-  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 0.85rem 2rem;
-    border-radius: 0.5rem;
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.22s;
-    letter-spacing: 0.01em;
-  }
-  .btn-primary {
-    background: var(--accent);
-    color: white;
-    border: 2px solid var(--accent);
-  }
-  .btn-primary:hover { background: #145530; border-color: #145530; transform: translateY(-1px); }
-  .btn-outline {
-    background: transparent;
-    color: var(--ink);
-    border: 2px solid var(--line);
-  }
-  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;gap:4rem;
+  padding:7rem 3rem 4rem;
+  max-width:1300px;margin:0 auto;
+  position:relative;
+}
+.hero::after{
+  content:'';
+  position:absolute;right:-200px;top:50%;transform:translateY(-50%);
+  width:600px;height:600px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(27,94,53,.15) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--green-light);border:1px solid rgba(27,94,53,.25);
+  color:var(--green);border-radius:2rem;padding:.3rem .9rem;
+  font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  margin-bottom:1.6rem;
+}
+.hero-eyebrow span{
+  width:7px;height:7px;border-radius:50%;background:var(--green-mid);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
+.hero h1{
+  font-family:var(--serif);
+  font-size:clamp(2.8rem,4.5vw,4.5rem);
+  line-height:1.08;
+  letter-spacing:-.02em;
+  margin-bottom:1.5rem;
+  color:var(--ink);
+}
+.hero h1 em{font-style:italic;color:var(--green)}
+.hero-desc{
+  font-size:1rem;color:var(--ink-soft);line-height:1.8;
+  max-width:480px;margin-bottom:2.5rem;font-weight:400;
+}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-fill{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--green);color:white;
+  padding:.8rem 1.8rem;border-radius:.5rem;
+  font-weight:700;font-size:.88rem;text-decoration:none;
+  transition:all .22s;letter-spacing:.02em;
+}
+.btn-fill:hover{background:#145530;transform:translateY(-2px);box-shadow:0 8px 24px rgba(27,94,53,.3)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:transparent;color:var(--ink);
+  border:1.5px solid var(--line);
+  padding:.8rem 1.8rem;border-radius:.5rem;
+  font-weight:700;font-size:.88rem;text-decoration:none;
+  transition:all .22s;
+}
+.btn-ghost:hover{border-color:var(--green);color:var(--green)}
 
-  /* Hero right: terminal card */
-  .hero-visual {
-    display: flex; flex-direction: column; gap: 1.5rem;
-    animation: floatIn 0.8s ease forwards;
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  @keyframes floatIn {
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .terminal {
-    background: #0d1117;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.18);
-  }
-  .terminal-bar {
-    background: #161b22;
-    padding: 0.7rem 1.2rem;
-    display: flex; align-items: center; gap: 0.5rem;
-  }
-  .dot { width: 12px; height: 12px; border-radius: 50%; }
-  .dot-red { background: #ff5f57; }
-  .dot-yellow { background: #ffbd2e; }
-  .dot-green { background: #28c840; }
-  .terminal-title {
-    flex: 1; text-align: center;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: #6b7280;
-  }
-  .terminal-body {
-    padding: 1.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    line-height: 1.9;
-    color: #e6edf3;
-  }
-  .t-prompt { color: #2d9b5a; }
-  .t-cmd { color: #79c0ff; }
-  .t-comment { color: #6e7681; }
-  .t-string { color: #a5d6ff; }
-  .t-value { color: #ffa657; }
-  .t-cursor {
-    display: inline-block;
-    width: 2px; height: 1em;
-    background: #e6edf3;
-    animation: blink 1s step-end infinite;
-    vertical-align: text-bottom;
-  }
-  @keyframes blink { 50% { opacity: 0; } }
+/* Terminal */
+.hero-right{display:flex;flex-direction:column;gap:1.4rem;animation:slideUp .8s ease both .2s;opacity:0}
+@keyframes slideUp{to{opacity:1;transform:none}from{opacity:0;transform:translateY(24px)}}
+.terminal{
+  background:#13181f;border-radius:1.1rem;overflow:hidden;
+  box-shadow:0 28px 80px rgba(0,0,0,.22),0 0 0 1px rgba(255,255,255,.04);
+}
+.term-bar{
+  background:#1c232e;padding:.7rem 1.1rem;
+  display:flex;align-items:center;gap:.45rem;
+}
+.dot{width:11px;height:11px;border-radius:50%}
+.dr{background:#ff5f57}.dy{background:#ffbd2e}.dg{background:#28c840}
+.term-title{flex:1;text-align:center;font-family:var(--mono);font-size:.7rem;color:#4a5568}
+.term-body{padding:1.4rem 1.6rem;font-family:var(--mono);font-size:.8rem;line-height:2;color:#cdd6f4}
+.tc{color:#6b7280}.tk{color:#89b4fa}.ts{color:#a6e3a1}.tn{color:#fab387}.tp{color:#cba6f7}.ti{color:#f38ba8}
+.cursor{display:inline-block;width:2px;height:1em;background:#cdd6f4;animation:blink 1s step-end infinite;vertical-align:text-bottom}
+@keyframes blink{50%{opacity:0}}
 
-  /* stat chips */
-  .stat-chips {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
-  }
-  .chip {
-    background: white;
-    border: 1px solid var(--line);
-    border-radius: 0.75rem;
-    padding: 1rem 1.2rem;
-    text-align: center;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  }
-  .chip-num {
-    font-family: var(--font-display);
-    font-size: 2rem;
-    color: var(--accent);
-    line-height: 1;
-  }
-  .chip-label {
-    font-size: 0.72rem;
-    color: var(--ink-muted);
-    font-weight: 500;
-    letter-spacing: 0.03em;
-    margin-top: 0.3rem;
-  }
+/* Stats row */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.stat-card{
+  background:var(--white);border:1px solid var(--line);
+  border-radius:.85rem;padding:1rem;text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+.stat-num{font-family:var(--serif);font-size:2rem;color:var(--green);line-height:1}
+.stat-lbl{font-size:.68rem;color:var(--ink-muted);font-weight:600;letter-spacing:.04em;margin-top:.3rem;text-transform:uppercase}
 
-  /* ── SECTIONS ── */
-  section { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
-  .section-label {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-  }
-  .section-title {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 3.5vw, 2.8rem);
-    color: var(--ink);
-    margin-bottom: 3.5rem;
-    line-height: 1.2;
-  }
-  .section-divider {
-    width: 100%;
-    height: 1px;
-    background: var(--line);
-    margin: 0 auto;
-  }
+/* ─── SECTION SHARED ─── */
+.wrap{max-width:1280px;margin:0 auto;padding:0 3rem}
+section{padding:6rem 0}
+.sec-label{
+  font-family:var(--mono);font-size:.72rem;color:var(--green);
+  letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-bottom:.4rem;
+}
+.sec-title{
+  font-family:var(--serif);font-size:clamp(2rem,3.2vw,2.8rem);
+  color:var(--ink);line-height:1.15;margin-bottom:3.5rem;
+}
+hr.divider{border:none;border-top:1px solid var(--line);margin:0}
 
-  /* ── PROJECTS ── */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.8rem;
-  }
-  .project-card {
-    background: white;
-    border: 1px solid var(--line);
-    border-radius: 1.2rem;
-    overflow: hidden;
-    transition: transform 0.25s, box-shadow 0.25s;
-    cursor: default;
-  }
-  .project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.10);
-  }
-  .project-card.featured {
-    grid-column: span 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-  .card-visual {
-    height: 200px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 3.5rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .project-card.featured .card-visual { height: 100%; min-height: 240px; }
-  .cv-vet { background: linear-gradient(135deg, #e8f5ee 0%, #c8ecd9 100%); }
-  .cv-garage { background: linear-gradient(135deg, #fdf4e3 0%, #fae8c0 100%); }
-  .cv-alumni { background: linear-gradient(135deg, #e8eef8 0%, #c8d8f0 100%); }
-  .cv-flt { background: linear-gradient(135deg, #f5e8f8 0%, #e4c8f0 100%); }
-  .card-icon {
-    font-size: 4rem;
-    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.12));
-  }
-  .card-body { padding: 1.6rem; }
-  .project-card.featured .card-body { padding: 2rem 2.2rem; display: flex; flex-direction: column; justify-content: center; }
-  .card-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
-  .tag {
-    padding: 0.2rem 0.7rem;
-    border-radius: 2rem;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-  }
-  .tag-green { background: var(--accent-light); color: var(--accent); }
-  .tag-gold { background: var(--gold-light); color: var(--gold); }
-  .tag-blue { background: #e8eef8; color: #2558a7; }
-  .tag-purple { background: #f0e8f8; color: #6b2fa7; }
-  .card-title {
-    font-family: var(--font-display);
-    font-size: 1.4rem;
-    color: var(--ink);
-    margin-bottom: 0.6rem;
-  }
-  .project-card.featured .card-title { font-size: 1.8rem; }
-  .card-url {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--accent);
-    margin-bottom: 0.8rem;
-    text-decoration: none;
-  }
-  .card-desc {
-    font-size: 0.88rem;
-    color: var(--ink-soft);
-    line-height: 1.65;
-    margin-bottom: 1.2rem;
-  }
-  .card-bullets {
-    list-style: none;
-    display: flex; flex-direction: column; gap: 0.4rem;
-  }
-  .card-bullets li {
-    font-size: 0.83rem;
-    color: var(--ink-soft);
-    display: flex; align-items: flex-start; gap: 0.5rem;
-  }
-  .card-bullets li::before {
-    content: '→';
-    color: var(--accent);
-    font-weight: 600;
-    flex-shrink: 0;
-    margin-top: 0.05em;
-  }
+/* ─── PROJECTS ─── */
+#projects{background:var(--bg)}
+.projects-layout{display:flex;flex-direction:column;gap:2.5rem}
 
-  /* ── SKILLS ── */
-  #skills { background: #0d1117; }
-  #skills .section-label { color: #2d9b5a; }
-  #skills .section-title { color: white; }
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-  }
-  .skill-group {
-    background: #161b22;
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 1rem;
-    padding: 1.5rem;
-  }
-  .skill-group-title {
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #2d9b5a;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    font-family: var(--font-mono);
-  }
-  .skill-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .skill-pill {
-    padding: 0.35rem 0.85rem;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 0.4rem;
-    font-size: 0.82rem;
-    color: #e6edf3;
-    font-family: var(--font-mono);
-    font-weight: 500;
-    transition: all 0.2s;
-  }
-  .skill-pill:hover {
-    background: rgba(45,155,90,0.15);
-    border-color: rgba(45,155,90,0.4);
-    color: #2d9b5a;
-  }
+/* Featured wide card */
+.proj-card{
+  background:var(--white);border:1px solid var(--line);border-radius:1.4rem;
+  overflow:hidden;transition:transform .28s,box-shadow .28s;
+}
+.proj-card:hover{transform:translateY(-5px);box-shadow:0 20px 60px rgba(0,0,0,.1)}
+.proj-card.wide{display:grid;grid-template-columns:420px 1fr}
+.proj-card.duo{display:grid;grid-template-columns:1fr 1fr}
+.proj-card.trio{display:grid;grid-template-columns:1fr 1fr 1fr}
 
-  /* ── TIMELINE ── */
-  .timeline { position: relative; padding-left: 2.5rem; }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 2px;
-    background: var(--line);
-  }
-  .tl-item {
-    position: relative;
-    padding-bottom: 3rem;
-  }
-  .tl-item::before {
-    content: '';
-    position: absolute;
-    left: -2.5rem;
-    top: 0.3rem;
-    width: 12px; height: 12px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 0 4px var(--accent-light);
-    margin-left: -5px;
-  }
-  .tl-date {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--accent);
-    font-weight: 500;
-    margin-bottom: 0.3rem;
-  }
-  .tl-role {
-    font-family: var(--font-display);
-    font-size: 1.3rem;
-    color: var(--ink);
-    margin-bottom: 0.2rem;
-  }
-  .tl-company {
-    font-size: 0.88rem;
-    color: var(--ink-muted);
-    margin-bottom: 0.8rem;
-  }
-  .tl-points { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
-  .tl-points li {
-    font-size: 0.88rem;
-    color: var(--ink-soft);
-    padding-left: 1.1rem;
-    position: relative;
-  }
-  .tl-points li::before {
-    content: '▸';
-    position: absolute; left: 0;
-    color: var(--accent);
-    font-size: 0.7rem;
-    top: 0.15em;
-  }
+/* Visual panes */
+.proj-visual{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;padding:2.5rem;min-height:280px;
+}
+.proj-visual .big-icon{font-size:4.5rem;filter:drop-shadow(0 8px 20px rgba(0,0,0,.15));margin-bottom:1rem;z-index:1;position:relative}
+.proj-visual .proj-url{
+  font-family:var(--mono);font-size:.72rem;font-weight:500;
+  padding:.25rem .75rem;border-radius:2rem;background:rgba(255,255,255,.25);
+  color:rgba(255,255,255,.9);text-decoration:none;border:1px solid rgba(255,255,255,.3);
+  z-index:1;position:relative;transition:background .2s;
+}
+.proj-visual .proj-url:hover{background:rgba(255,255,255,.4)}
+.proj-visual::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 40%,rgba(255,255,255,.18),transparent 60%);
+}
 
-  /* ── CONTACT ── */
-  #contact {
-    background: var(--ink);
-    color: white;
-    text-align: center;
-  }
-  #contact .section-title { color: white; }
-  .contact-grid {
-    display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap;
-    margin-top: 2.5rem;
-  }
-  .contact-link {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 0.6rem;
-    padding: 0.85rem 1.5rem;
-    text-decoration: none;
-    color: white;
-    font-size: 0.88rem;
-    font-weight: 500;
-    transition: all 0.2s;
-  }
-  .contact-link:hover {
-    background: var(--accent);
-    border-color: var(--accent);
-    transform: translateY(-2px);
-  }
-  .contact-icon { font-size: 1.1rem; }
+/* Colour themes */
+.vis-vet{background:linear-gradient(135deg,#1b5e35,#2a8c4e)}
+.vis-garage{background:linear-gradient(135deg,#854d0e,#c2822c)}
+.vis-flt{background:linear-gradient(135deg,#1a3a6b,#2e5fa3)}
+.vis-elev{background:linear-gradient(135deg,#3d1a6e,#7c3aad)}
+.vis-alumni{background:linear-gradient(135deg,#0a5c52,#168b7a)}
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--ink);
-    border-top: 1px solid rgba(255,255,255,0.06);
-    text-align: center;
-    padding: 2rem;
-    font-size: 0.78rem;
-    color: #6b7280;
-    font-family: var(--font-mono);
-  }
+/* Content pane */
+.proj-body{padding:2rem 2.2rem;display:flex;flex-direction:column;justify-content:center}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+.ptag{
+  padding:.2rem .65rem;border-radius:2rem;font-size:.68rem;font-weight:700;letter-spacing:.04em;
+}
+.pt-green{background:var(--green-light);color:var(--green)}
+.pt-amber{background:var(--amber-light);color:var(--amber)}
+.pt-blue{background:var(--blue-light);color:var(--blue)}
+.pt-purple{background:var(--purple-light);color:var(--purple)}
+.pt-teal{background:var(--teal-light);color:var(--teal)}
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 2.5rem; }
-    .hero-visual { display: none; }
-    section { padding: 4rem 1.5rem; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .project-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
-    .project-card.featured .card-visual { min-height: 180px; }
-    .stat-chips { grid-template-columns: repeat(3, 1fr); }
-  }
+.proj-title{font-family:var(--serif);font-size:1.6rem;margin-bottom:.3rem;color:var(--ink)}
+.proj-sub{font-size:.8rem;color:var(--green);font-family:var(--mono);margin-bottom:.8rem;font-weight:500}
+.proj-desc{font-size:.88rem;color:var(--ink-soft);line-height:1.7;margin-bottom:1.2rem}
+
+/* Feature grid inside card */
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .8rem}
+.feat-item{
+  font-size:.8rem;color:var(--ink-soft);
+  display:flex;align-items:flex-start;gap:.4rem;line-height:1.5;
+}
+.feat-item::before{
+  content:'▸';color:var(--green);font-size:.65rem;
+  flex-shrink:0;margin-top:.18em;font-weight:700;
+}
+
+/* Single column card */
+.proj-card.single{display:grid;grid-template-columns:320px 1fr}
+
+/* Compact card for duo/trio */
+.proj-card.compact .proj-visual{min-height:200px}
+.proj-card.compact .proj-body{padding:1.6rem 1.8rem}
+.proj-card.compact .proj-title{font-size:1.25rem}
+.proj-card.compact .feat-grid{grid-template-columns:1fr}
+
+/* ─── SKILLS DARK ─── */
+#skills{background:var(--ink);position:relative;overflow:hidden}
+#skills::before{
+  content:'';position:absolute;top:-200px;right:-200px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(42,140,78,.12),transparent 70%);
+  pointer-events:none;
+}
+#skills .sec-label{color:#2a8c4e}
+#skills .sec-title{color:var(--white)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem}
+.skill-group{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:1rem;padding:1.4rem 1.5rem;
+}
+.sg-title{
+  font-family:var(--mono);font-size:.68rem;color:#2a8c4e;
+  letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-bottom:1rem;
+}
+.pills{display:flex;flex-wrap:wrap;gap:.4rem}
+.pill{
+  padding:.3rem .8rem;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:.35rem;font-size:.78rem;
+  color:#cdd6f4;font-family:var(--mono);font-weight:500;
+  transition:all .2s;cursor:default;
+}
+.pill:hover{background:rgba(42,140,78,.15);border-color:rgba(42,140,78,.4);color:#2a8c4e}
+
+/* ─── EXPERIENCE ─── */
+#experience{background:var(--bg2)}
+.tl{position:relative;padding-left:2.8rem}
+.tl::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--line)}
+.tl-item{position:relative;padding-bottom:3rem}
+.tl-item::before{
+  content:'';position:absolute;left:-2.8rem;top:.25rem;
+  width:13px;height:13px;border-radius:50%;
+  background:var(--green);box-shadow:0 0 0 4px var(--green-light);
+  margin-left:-5.5px;
+}
+.tl-date{font-family:var(--mono);font-size:.72rem;color:var(--green);font-weight:500;margin-bottom:.2rem}
+.tl-role{font-family:var(--serif);font-size:1.35rem;color:var(--ink);margin-bottom:.15rem}
+.tl-where{font-size:.85rem;color:var(--ink-muted);margin-bottom:.85rem}
+.tl-pts{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.tl-pts li{
+  font-size:.85rem;color:var(--ink-soft);
+  padding-left:1.2rem;position:relative;line-height:1.55;
+}
+.tl-pts li::before{content:'▸';position:absolute;left:0;color:var(--green);font-size:.65rem;top:.2em}
+
+/* ─── ACHIEVEMENTS ─── */
+#achievements{background:var(--bg)}
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.ach-card{
+  background:var(--white);border:1px solid var(--line);
+  border-radius:1rem;padding:1.6rem 1.8rem;
+  display:flex;align-items:flex-start;gap:1rem;
+  transition:transform .2s,box-shadow .2s;
+}
+.ach-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.07)}
+.ach-icon{font-size:1.8rem;flex-shrink:0;margin-top:.1rem}
+.ach-text h4{font-family:var(--serif);font-size:1rem;color:var(--ink);margin-bottom:.3rem}
+.ach-text p{font-size:.82rem;color:var(--ink-soft);line-height:1.6}
+
+/* ─── CONTACT ─── */
+#contact{background:var(--ink)}
+.contact-inner{max-width:800px;margin:0 auto;text-align:center}
+#contact .sec-label{color:#2a8c4e;display:block;text-align:center}
+#contact .sec-title{color:var(--white);text-align:center}
+.contact-sub{color:#6b7280;font-size:.95rem;max-width:480px;margin:0 auto 2.5rem;line-height:1.75}
+.contact-links{display:flex;justify-content:center;flex-wrap:wrap;gap:1rem}
+.clink{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:.6rem;padding:.8rem 1.4rem;
+  text-decoration:none;color:var(--white);font-size:.85rem;font-weight:600;
+  transition:all .2s;
+}
+.clink:hover{background:var(--green);border-color:var(--green);transform:translateY(-2px)}
+.clink-icon{font-size:1rem}
+
+/* ─── FOOTER ─── */
+footer{
+  background:var(--ink);border-top:1px solid rgba(255,255,255,.06);
+  text-align:center;padding:1.8rem;
+  font-family:var(--mono);font-size:.72rem;color:#4a5568;
+}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:960px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .hero{grid-template-columns:1fr;padding:7rem 1.5rem 3rem;gap:2rem}
+  .hero-right{display:none}
+  .wrap{padding:0 1.5rem}
+  section{padding:4rem 0}
+  .proj-card.wide,.proj-card.duo,.proj-card.trio,.proj-card.single{grid-template-columns:1fr}
+  .stat-row{grid-template-columns:repeat(2,1fr)}
+  .feat-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <span class="nav-logo">mitchell.dev</span>
+  <span class="nav-logo">mitchell.ogbuabor.dev</span>
   <ul class="nav-links">
     <li><a href="#projects">Projects</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
+    <li><a href="#achievements">Achievements</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="mailto:okechukwumitchell32@gmail.com" class="btn btn-primary" style="padding: 0.6rem 1.4rem; font-size: 0.82rem;">
-    Hire Me
-  </a>
+  <a href="mailto:okechukwumitchell32@gmail.com" class="nav-cta">Hire Me</a>
 </nav>
 
 <!-- HERO -->
-<div style="max-width: 1200px; margin: 0 auto;">
-  <div class="hero">
-    <div class="hero-text">
-      <div class="hero-tag">Available for opportunities</div>
-      <h1>Building the web with <em>precision</em> & purpose</h1>
-      <p class="hero-sub">
-        Hi, I'm <strong>Mitchell</strong> — an ASP.NET Core developer with 3+ years shipping production software across veterinary, automotive, and logistics industries. I turn complex backend challenges into clean, scalable solutions.
-      </p>
-      <div class="hero-ctas">
-        <a href="#projects" class="btn btn-primary">View My Work</a>
-        <a href="https://github.com/Okechukwu-Mitchell" target="_blank" class="btn btn-outline">GitHub ↗</a>
+<div style="position:relative;z-index:1">
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span></span>Open to New Opportunities</div>
+    <h1>Crafting <em>scalable</em><br>systems that<br>move businesses.</h1>
+    <p class="hero-desc">
+      I'm <strong>Mitchell</strong> — an ASP.NET Core developer with 3+ years building and shipping production-grade SaaS products across veterinary, automotive, logistics, and field-service industries in the UK and globally.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-fill">View My Work →</a>
+      <a href="https://github.com/Okechukwu-Mitchell" target="_blank" class="btn-ghost">GitHub ↗</a>
+      <a href="https://linkedin.com/in/okechukwu-ogbuabor" target="_blank" class="btn-ghost">LinkedIn ↗</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="terminal">
+      <div class="term-bar">
+        <div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div>
+        <div class="term-title">mitchell.cs — developer profile</div>
+      </div>
+      <div class="term-body">
+        <div><span class="tc">// Okechukwu Mitchell Ogbuabor</span></div>
+        <div><span class="tk">public class</span> <span class="tp">Developer</span> {</div>
+        <div>&nbsp;&nbsp;<span class="tk">string</span> Name = <span class="ts">"Mitchell"</span>;</div>
+        <div>&nbsp;&nbsp;<span class="tk">string</span> Role = <span class="ts">"ASP.NET Core Engineer"</span>;</div>
+        <div>&nbsp;&nbsp;<span class="tk">int</span> YearsExp = <span class="tn">3</span>;</div>
+        <div>&nbsp;&nbsp;<span class="tk">string[]</span> Stack = {</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ts">"C#"</span>, <span class="ts">"ASP.NET Core"</span>, <span class="ts">"MVC"</span>,</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ts">"Web API"</span>, <span class="ts">"EF Core"</span>, <span class="ts">"SQL Server"</span>,</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ts">"JavaScript"</span>, <span class="ts">"Bootstrap"</span></div>
+        <div>&nbsp;&nbsp;};</div>
+        <div>&nbsp;&nbsp;<span class="tk">bool</span> OpenToWork = <span class="ti">true</span>; <span class="tc">// ✓</span></div>
+        <div>}<span class="cursor"></span></div>
       </div>
     </div>
-    <div class="hero-visual">
-      <div class="terminal">
-        <div class="terminal-bar">
-          <div class="dot dot-red"></div>
-          <div class="dot dot-yellow"></div>
-          <div class="dot dot-green"></div>
-          <div class="terminal-title">developer.cs</div>
+    <div class="stat-row">
+      <div class="stat-card"><div class="stat-num">3+</div><div class="stat-lbl">Years Exp.</div></div>
+      <div class="stat-card"><div class="stat-num">5</div><div class="stat-lbl">Live Products</div></div>
+      <div class="stat-card"><div class="stat-num">4</div><div class="stat-lbl">Industries</div></div>
+      <div class="stat-card"><div class="stat-num">UK</div><div class="stat-lbl">+ Global</div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<section id="projects" style="position:relative;z-index:1">
+<div class="wrap">
+  <div class="sec-label">// selected work</div>
+  <div class="sec-title">Production Projects I've Shipped</div>
+  <div class="projects-layout">
+
+    <!-- 1. VETMAN — FEATURED WIDE -->
+    <div class="proj-card wide">
+      <div class="proj-visual vis-vet">
+        <div class="big-icon">🐾</div>
+        <a href="https://vetman.ng" target="_blank" class="proj-url">vetman.ng ↗</a>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="ptag pt-green">ASP.NET Core</span>
+          <span class="ptag pt-green">Entity Framework</span>
+          <span class="ptag pt-amber">SQL Server</span>
+          <span class="ptag pt-blue">Web API</span>
+          <span class="ptag pt-teal">Multi-module SaaS</span>
+          <span class="ptag pt-green">⭐ Featured</span>
         </div>
-        <div class="terminal-body">
-          <div><span class="t-comment">// Okechukwu Mitchell Ogbuabor</span></div>
-          <div><span class="t-cmd">var</span> developer = <span class="t-cmd">new</span> {</div>
-          <div>&nbsp;&nbsp;Name = <span class="t-string">"Mitchell"</span>,</div>
-          <div>&nbsp;&nbsp;Role = <span class="t-string">"ASP.NET Core Dev"</span>,</div>
-          <div>&nbsp;&nbsp;Experience = <span class="t-value">3</span>,<span class="t-comment"> // years</span></div>
-          <div>&nbsp;&nbsp;Stack = <span class="t-cmd">new</span>[] {</div>
-          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-string">"C#"</span>, <span class="t-string">"ASP.NET Core"</span>,</div>
-          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-string">"SQL Server"</span>, <span class="t-string">"EF Core"</span>,</div>
-          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-string">"Web API"</span>, <span class="t-string">"JavaScript"</span></div>
-          <div>&nbsp;&nbsp;},</div>
-          <div>&nbsp;&nbsp;Location = <span class="t-string">"Lagos, Nigeria"</span>,</div>
-          <div>&nbsp;&nbsp;Status = <span class="t-string">"Open to work"</span> ✓</div>
-          <div>};<span class="t-cursor"></span></div>
+        <div class="proj-title">VetMan — Global Veterinary Practice Management</div>
+        <div class="proj-sub">vetman.ng · Bivisoft Limited</div>
+        <div class="proj-desc">
+          A comprehensive cloud-based SaaS platform for veterinary clinics globally — managing every species, every workflow. Handles patient records, multi-channel billing, appointment scheduling, client communication, DOC (day-old chick) bookings, and a Point-of-Sale module for clinic stores.
+        </div>
+        <div class="feat-grid">
+          <div class="feat-item">Treatment module with diagnosis-based billing setup and automated cost calculation</div>
+          <div class="feat-item">DOC Booking module — group customers by arrival date, hatchery order prep, SMS/email alerts</div>
+          <div class="feat-item">Patient record management — full medical history, disease tracking, pet travel certificates</div>
+          <div class="feat-item">Point of Sale (POS) — tracks sales, inventory, accepts cash/card; integrated with treatment data</div>
+          <div class="feat-item">Automated SMS &amp; email appointment reminders to reduce missed visits</div>
+          <div class="feat-item">Client notification system with one-click broadcast for price or date changes</div>
+          <div class="feat-item">Multi-module dashboard — 100+ vet clinics served with live usage counters</div>
+          <div class="feat-item">Vaccine module, reports module, and scalable multi-company architecture</div>
+          <div class="feat-item">reCAPTCHA integration and role-based access (Admin / Manager / Staff)</div>
+          <div class="feat-item">Google Analytics + real-time API usage tracking via custom JS</div>
         </div>
       </div>
-      <div class="stat-chips">
-        <div class="chip">
-          <div class="chip-num">3+</div>
-          <div class="chip-label">Years Exp.</div>
+    </div>
+
+    <!-- 2. GARAGE KING + FORKLIFT PRO — SIDE BY SIDE -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem" class="duo-row">
+
+      <!-- GARAGE KING -->
+      <div class="proj-card compact" style="display:flex;flex-direction:column">
+        <div class="proj-visual vis-garage" style="min-height:190px">
+          <div class="big-icon">🔧</div>
+          <a href="https://garageking.uk" target="_blank" class="proj-url">garageking.uk ↗</a>
         </div>
-        <div class="chip">
-          <div class="chip-num">4</div>
-          <div class="chip-label">Live Products</div>
+        <div class="proj-body" style="flex:1">
+          <div class="proj-tags">
+            <span class="ptag pt-amber">ASP.NET Core MVC</span>
+            <span class="ptag pt-amber">Bootstrap</span>
+            <span class="ptag pt-amber">UK VAT Engine</span>
+            <span class="ptag pt-green">Real Users</span>
+          </div>
+          <div class="proj-title">Garage King</div>
+          <div class="proj-sub">garageking.uk · UK Garage Management Suite</div>
+          <div class="proj-desc">End-to-end cloud garage management for UK workshops. Replaces paper diaries and legacy software with a modern, mobile-friendly system trusted by real UK garages.</div>
+          <div class="feat-grid">
+            <div class="feat-item">Online diary — prevents double-bookings, matches ramp times, web + mobile</div>
+            <div class="feat-item">Automated MOT/service SMS reminders — unlimited, reduces no-shows</div>
+            <div class="feat-item">Professional invoicing — raise accurate invoices in minutes</div>
+            <div class="feat-item">UK VAT engine — automated VAT computations, eliminating manual errors</div>
+            <div class="feat-item">24-point VHC mobile app — engineers capture photos and approvals at the ramp</div>
+            <div class="feat-item">Custom garage website — owners update directly from GarageKing dashboard</div>
+            <div class="feat-item">Profit/utilisation/repeat-work analytics dashboard</div>
+            <div class="feat-item">Google Ads conversion tracking + Facebook Meta Pixel integration</div>
+            <div class="feat-item">Live chat (Tawk.to) + CookieYes GDPR compliance</div>
+            <div class="feat-item">3 real testimonials: Scott (A2B MOT), Charlie (A1 MOT Centre), Ari (Kelcos MOT)</div>
+          </div>
         </div>
-        <div class="chip">
-          <div class="chip-num">3</div>
-          <div class="chip-label">Industries</div>
+      </div>
+
+      <!-- FLT / FORKLIFT PRO -->
+      <div class="proj-card compact" style="display:flex;flex-direction:column">
+        <div class="proj-visual vis-flt" style="min-height:190px">
+          <div class="big-icon">🏭</div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:.4rem;position:relative;z-index:1">
+            <a href="https://forkliftprosoft.co.uk" target="_blank" class="proj-url">forkliftprosoft.co.uk ↗</a>
+            <a href="https://forkliftpro.bosoftware.co.uk" target="_blank" class="proj-url">forkliftpro.bosoftware.co.uk ↗</a>
+          </div>
         </div>
+        <div class="proj-body" style="flex:1">
+          <div class="proj-tags">
+            <span class="ptag pt-blue">ASP.NET Core</span>
+            <span class="ptag pt-blue">jQuery</span>
+            <span class="ptag pt-blue">Xero API</span>
+            <span class="ptag pt-amber">UK Compliance</span>
+          </div>
+          <div class="proj-title">ForkLiftPro Software</div>
+          <div class="proj-sub">forkliftprosoft.co.uk · Field Service Management</div>
+          <div class="proj-desc">Purpose-built scheduling and service management for forklift and materials handling equipment industry. Powers field engineers with digital tools from job sheets to compliance certificates.</div>
+          <div class="feat-grid">
+            <div class="feat-item">Digital diary — colour-coded job status (booked/in-progress/completed/reopened), multi-engineer view</div>
+            <div class="feat-item">Smart digital job sheets — client info, parts used, digital signatures from engineer &amp; client</div>
+            <div class="feat-item">Thorough Examination management — chain/fork condition, capacity plate, compliance records</div>
+            <div class="feat-item">Automated quotation module — generates quotes from Work Recommended &amp; TE reports</div>
+            <div class="feat-item">Invoicing with auto-pulled labour/travel from job sheets, pre-set markup percentages</div>
+            <div class="feat-item">Seamless Xero integration — invoice sync with client info, VAT, payment dates auto-transferred</div>
+            <div class="feat-item">Real-time geo-location engineer tracking via mobile app</div>
+            <div class="feat-item">Employee time clock — clock in/out of jobs via mobile app</div>
+            <div class="feat-item">Intelligent parts management — MOQ for central storage and mobile vans</div>
+            <div class="feat-item">Proactive alerts for upcoming TE dates, service schedules, and maintenance needs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. ELEVATEX PRO — SINGLE -->
+    <div class="proj-card single">
+      <div class="proj-visual vis-elev">
+        <div class="big-icon">🛗</div>
+        <a href="https://elevatexpro.co.uk" target="_blank" class="proj-url">elevatexpro.co.uk ↗</a>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="ptag pt-purple">ASP.NET Core</span>
+          <span class="ptag pt-purple">Xero Integration</span>
+          <span class="ptag pt-blue">Geo-Location</span>
+          <span class="ptag pt-amber">UK Safety Compliance</span>
+          <span class="ptag pt-green">Lift &amp; Elevator Industry</span>
+        </div>
+        <div class="proj-title">ElevateX-PRO — Elevator Service Management</div>
+        <div class="proj-sub">elevatexpro.co.uk · Lift &amp; Escalator Field Service Platform</div>
+        <div class="proj-desc">
+          A next-generation service management platform for lift and elevator maintenance companies. Specifically designed for the Lift and Escalator sector — managing inspections, certifications, engineer scheduling, Thorough Examinations under LOLER/PSSR compliance, and full financial integration with Xero.
+        </div>
+        <div class="feat-grid">
+          <div class="feat-item">Smart scheduler — colour-coded statuses, multi-engineer view, real-time job updates</div>
+          <div class="feat-item">Smart job sheets — digital signatures, warranty fields, damage assessment, instant email/print</div>
+          <div class="feat-item">Thorough Examination Management — LOLER/PSSR compliance with automated reminder scheduling</div>
+          <div class="feat-item">Quotation module — auto-generates quotes from Work Recommended and TE reports</div>
+          <div class="feat-item">Effortless invoicing — labour/travel auto-pulled from job sheets, VAT handled automatically</div>
+          <div class="feat-item">Seamless Xero integration — one-click invoice sync, Resend to Xero, full accounting bridge</div>
+          <div class="feat-item">Elevator safety compliance — inspection schedules, certification renewals, digital audit records</div>
+          <div class="feat-item">Smart parts management — MOQ alerts for central storage and field vans</div>
+          <div class="feat-item">Geo-location field tracking — real-time engineer location visibility and routing</div>
+          <div class="feat-item">Proactive alerts — automated reminders for due examinations and scheduled services</div>
+          <div class="feat-item">Enhanced reporting &amp; analytics — performance metrics, service KPIs, compliance status</div>
+          <div class="feat-item">Fully customisable to business workflows; structured JSON-LD SEO for search ranking</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. UNN FVM ALUMNI — WIDE -->
+    <div class="proj-card wide" style="grid-template-columns:300px 1fr">
+      <div class="proj-visual vis-alumni">
+        <div class="big-icon">🎓</div>
+        <a href="https://alumni.bivisoft.com" target="_blank" class="proj-url">alumni.bivisoft.com ↗</a>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="ptag pt-teal">ASP.NET Core Web API</span>
+          <span class="ptag pt-teal">SQL Server</span>
+          <span class="ptag pt-green">Rich Text CMS</span>
+          <span class="ptag pt-blue">Payment Gateway</span>
+        </div>
+        <div class="proj-title">UNN FVM Alumni Portal</div>
+        <div class="proj-sub">alumni.bivisoft.com · University of Nigeria — Faculty of Veterinary Medicine</div>
+        <div class="proj-desc">A full-featured membership platform for the alumni community of UNN's Faculty of Veterinary Medicine — handling membership registration, dues payments, events, blogging, and scalable database performance.</div>
+        <div class="feat-grid">
+          <div class="feat-item">Membership registration and management via REST Web API backend</div>
+          <div class="feat-item">Payment processing integration for membership dues</div>
+          <div class="feat-item">Blogging module with rich-text editing — increased user engagement significantly</div>
+          <div class="feat-item">Events management system for alumni gatherings</div>
+          <div class="feat-item">Database query optimisation — reduced page load times significantly</div>
+          <div class="feat-item">Scalable architecture supporting growing alumni member base</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /projects-layout -->
+</div>
+</section>
+
+<hr class="divider">
+
+<!-- COMPANY CONTEXT STRIP -->
+<div style="background:var(--bg2);padding:2.5rem 0;position:relative;z-index:1">
+<div class="wrap">
+  <p style="font-size:.82rem;color:var(--ink-muted);text-align:center;font-family:var(--mono);letter-spacing:.04em;margin-bottom:1.2rem;text-transform:uppercase">All products built under</p>
+  <div style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:2.5rem">
+    <a href="https://www.bosoftware.co.uk" target="_blank" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:.3rem">
+      <span style="font-family:var(--serif);font-size:1.1rem;color:var(--ink);font-weight:700">Bosoftware Solutions Ltd</span>
+      <span style="font-family:var(--mono);font-size:.68rem;color:var(--green)">bosoftware.co.uk · Company No: 15456176</span>
+    </a>
+    <span style="color:var(--line);font-size:1.5rem">|</span>
+    <a href="https://www.bivisoft.com" target="_blank" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:.3rem">
+      <span style="font-family:var(--serif);font-size:1.1rem;color:var(--ink);font-weight:700">Bivisoft Limited</span>
+      <span style="font-family:var(--mono);font-size:.68rem;color:var(--green)">bivisoft.com · Enugu, Nigeria</span>
+    </a>
+  </div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<section id="skills" style="position:relative;z-index:1">
+<div class="wrap">
+  <div class="sec-label">// technical stack</div>
+  <div class="sec-title">What I Build With</div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="sg-title">Languages</div>
+      <div class="pills">
+        <span class="pill">C#</span>
+        <span class="pill">JavaScript</span>
+        <span class="pill">SQL</span>
+        <span class="pill">HTML5</span>
+        <span class="pill">CSS3</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-title">Backend Frameworks</div>
+      <div class="pills">
+        <span class="pill">ASP.NET Core</span>
+        <span class="pill">MVC</span>
+        <span class="pill">Web API</span>
+        <span class="pill">Entity Framework Core</span>
+        <span class="pill">REST APIs</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-title">Frontend & UI</div>
+      <div class="pills">
+        <span class="pill">jQuery</span>
+        <span class="pill">Bootstrap 5</span>
+        <span class="pill">Responsive Design</span>
+        <span class="pill">AOS Animations</span>
+        <span class="pill">SweetAlert2</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-title">Database & Storage</div>
+      <div class="pills">
+        <span class="pill">SQL Server</span>
+        <span class="pill">Query Optimisation</span>
+        <span class="pill">EF Migrations</span>
+        <span class="pill">Stored Procedures</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-title">Integrations</div>
+      <div class="pills">
+        <span class="pill">Xero API</span>
+        <span class="pill">Payment Gateways</span>
+        <span class="pill">Tawk.to Live Chat</span>
+        <span class="pill">reCAPTCHA</span>
+        <span class="pill">Facebook Pixel</span>
+        <span class="pill">Google Analytics</span>
+        <span class="pill">CookieYes GDPR</span>
+        <span class="pill">SMS/Email APIs</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-title">Tools & DevOps</div>
+      <div class="pills">
+        <span class="pill">Git</span>
+        <span class="pill">Visual Studio</span>
+        <span class="pill">VS Code</span>
+        <span class="pill">NPM</span>
+        <span class="pill">IIS Deployment</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-title">Architecture Patterns</div>
+      <div class="pills">
+        <span class="pill">Multi-tenant SaaS</span>
+        <span class="pill">Role-based Access</span>
+        <span class="pill">SOLID Principles</span>
+        <span class="pill">Unit Testing</span>
+        <span class="pill">Dependency Injection</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-title">Soft Skills</div>
+      <div class="pills">
+        <span class="pill">Problem-Solving</span>
+        <span class="pill">Team Collaboration</span>
+        <span class="pill">Mentoring</span>
+        <span class="pill">Attention to Detail</span>
+        <span class="pill">Communication</span>
       </div>
     </div>
   </div>
 </div>
-
-<div class="section-divider"></div>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-label">// selected work</div>
-  <div class="section-title">Projects I've Shipped</div>
-
-  <div class="projects-grid">
-    <!-- Featured -->
-    <div class="project-card featured">
-      <div class="card-visual cv-vet">
-        <div class="card-icon">🐾</div>
-      </div>
-      <div class="card-body">
-        <div class="card-tags">
-          <span class="tag tag-green">ASP.NET Core</span>
-          <span class="tag tag-blue">Entity Framework</span>
-          <span class="tag tag-gold">SQL Server</span>
-          <span class="tag tag-green">Featured</span>
-        </div>
-        <div class="card-title">VetMan</div>
-        <a href="https://vetman.ng" target="_blank" class="card-url">vetman.ng ↗</a>
-        <p class="card-desc">A global veterinary practice management system streamlining clinic operations end-to-end — from appointments to billing to inventory.</p>
-        <ul class="card-bullets">
-          <li>Appointment scheduling & patient record management with real-time dashboards</li>
-          <li>Third-party payment API integration for billing workflows</li>
-          <li>Inventory tracking & reporting engine with performance-optimised queries</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Garage King -->
-    <div class="project-card">
-      <div class="card-visual cv-garage">
-        <div class="card-icon">🔧</div>
-      </div>
-      <div class="card-body">
-        <div class="card-tags">
-          <span class="tag tag-gold">ASP.NET MVC</span>
-          <span class="tag tag-blue">Bootstrap</span>
-          <span class="tag tag-green">UK Tax Engine</span>
-        </div>
-        <div class="card-title">Garage King</div>
-        <a href="https://garageking.uk" target="_blank" class="card-url">garageking.uk ↗</a>
-        <p class="card-desc">Complete management suite for UK garages with scheduling, invoicing, and automated VAT calculations.</p>
-        <ul class="card-bullets">
-          <li>Tax engine automating VAT computation — eliminating manual errors</li>
-          <li>Real-time stock updates & resource allocation</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- FLT -->
-    <div class="project-card">
-      <div class="card-visual cv-flt">
-        <div class="card-icon">🏭</div>
-      </div>
-      <div class="card-body">
-        <div class="card-tags">
-          <span class="tag tag-purple">ASP.NET Core</span>
-          <span class="tag tag-gold">jQuery</span>
-          <span class="tag tag-blue">UK Compliance</span>
-        </div>
-        <div class="card-title">FLT Software</div>
-        <a href="https://forkliftprosoft.co.uk" target="_blank" class="card-url">forkliftprosoft.co.uk ↗</a>
-        <p class="card-desc">Enterprise solution for UK forklift businesses featuring scheduling, invoicing, emailing, and tax compliance.</p>
-        <ul class="card-bullets">
-          <li>Automated tax calculation meeting UK regulatory standards</li>
-          <li>Optimized API endpoints for system stability</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Alumni -->
-    <div class="project-card" style="grid-column: span 2;">
-      <div style="display: grid; grid-template-columns: 280px 1fr;">
-        <div class="card-visual cv-alumni" style="height: 100%; min-height: 200px;">
-          <div class="card-icon">🎓</div>
-        </div>
-        <div class="card-body">
-          <div class="card-tags">
-            <span class="tag tag-blue">Web API</span>
-            <span class="tag tag-green">SQL Server</span>
-            <span class="tag tag-gold">Rich Text</span>
-          </div>
-          <div class="card-title">UNN FVM Alumni Portal</div>
-          <a href="https://alumni.bivisoft.com" target="_blank" class="card-url">alumni.bivisoft.com ↗</a>
-          <p class="card-desc">A membership platform for the University of Nigeria's Faculty of Veterinary Medicine alumni, handling memberships, payments, blogging, and events.</p>
-          <ul class="card-bullets">
-            <li>Membership registration & payment via Web API backend</li>
-            <li>Blogging module with rich text editing, boosting user engagement</li>
-            <li>DB query optimisation reducing load times significantly</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills" style="background: #0d1117; max-width: 100%; padding: 6rem 0;">
-  <div style="max-width: 1100px; margin: 0 auto; padding: 0 3rem;">
-    <div class="section-label">// technical stack</div>
-    <div class="section-title">What I Work With</div>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <div class="skill-group-title">Languages</div>
-        <div class="skill-pills">
-          <span class="skill-pill">C#</span>
-          <span class="skill-pill">JavaScript</span>
-          <span class="skill-pill">HTML</span>
-          <span class="skill-pill">CSS</span>
-          <span class="skill-pill">SQL</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Frameworks</div>
-        <div class="skill-pills">
-          <span class="skill-pill">ASP.NET Core</span>
-          <span class="skill-pill">MVC</span>
-          <span class="skill-pill">Web API</span>
-          <span class="skill-pill">Entity Framework</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Frontend</div>
-        <div class="skill-pills">
-          <span class="skill-pill">jQuery</span>
-          <span class="skill-pill">Bootstrap</span>
-          <span class="skill-pill">Responsive UI</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Database & Tools</div>
-        <div class="skill-pills">
-          <span class="skill-pill">SQL Server</span>
-          <span class="skill-pill">Git</span>
-          <span class="skill-pill">NPM</span>
-          <span class="skill-pill">Visual Studio</span>
-          <span class="skill-pill">VS Code</span>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- EXPERIENCE -->
-<section id="experience">
-  <div class="section-label">// career timeline</div>
-  <div class="section-title">Experience & Education</div>
-  <div class="timeline">
+<section id="experience" style="position:relative;z-index:1">
+<div class="wrap">
+  <div class="sec-label">// career</div>
+  <div class="sec-title">Experience &amp; Education</div>
+  <div class="tl">
     <div class="tl-item">
-      <div class="tl-date">Jan 2023 – Present</div>
+      <div class="tl-date">January 2023 – Present</div>
       <div class="tl-role">ASP.NET Developer / Software Engineer</div>
-      <div class="tl-company">Bivisoft Limited · Enugu, Nigeria</div>
-      <ul class="tl-points">
-        <li>Designed, developed, and maintained web applications for veterinary, automotive, and logistics sectors</li>
-        <li>Optimised application performance, reducing response times for key features</li>
-        <li>Integrated third-party APIs for payment processing and external services</li>
-        <li>Mentored junior developers on best practices in coding, testing, and deployment</li>
-        <li>Conducted unit testing, debugging, and system maintenance for high-quality deliverables</li>
+      <div class="tl-where">Bivisoft Limited · Enugu, Nigeria</div>
+      <ul class="tl-pts">
+        <li>Designed, developed, and maintained 5 live web applications spanning veterinary, automotive, logistics, and elevator service industries</li>
+        <li>Built full-stack features across ASP.NET Core MVC, Web API, EF Core, and SQL Server — from backend architecture to responsive UI</li>
+        <li>Integrated Xero accounting API, payment gateways, SMS notification systems, Google Analytics, Meta Pixel, and live chat tools</li>
+        <li>Implemented UK regulatory compliance engines — automated VAT, LOLER/PSSR-compliant Thorough Examination workflows</li>
+        <li>Optimised database queries and API endpoints — reduced load times and improved response times across key features</li>
+        <li>Mentored junior developers on best practices in C#, testing, deployment, and architecture patterns</li>
+        <li>Conducted unit testing, debugging, and system maintenance to maintain high-quality, minimal-downtime deliverables</li>
       </ul>
     </div>
-    <div class="tl-item" style="padding-bottom: 0;">
-      <div class="tl-date">Feb 2014 – Nov 2018</div>
-      <div class="tl-role">B.Eng in Computer Engineering</div>
-      <div class="tl-company">Michael Okpara University of Agriculture · Umudike, Nigeria</div>
-      <ul class="tl-points">
-        <li>Final-year project: Grain Moisture Detection System — integrated hardware sensors with an ASP.NET + SQL Server web interface</li>
-        <li>Foundation in hardware systems, software development, database management, and system design</li>
+    <div class="tl-item" style="padding-bottom:0">
+      <div class="tl-date">February 2014 – November 2018</div>
+      <div class="tl-role">B.Eng, Computer Engineering</div>
+      <div class="tl-where">Michael Okpara University of Agriculture · Umudike, Abia State, Nigeria</div>
+      <ul class="tl-pts">
+        <li>Final-year project: <em>Grain Moisture Detection System</em> — integrated hardware sensors with an ASP.NET + SQL Server web interface providing real-time grain moisture monitoring and data visualisation for farmers</li>
+        <li>Strong foundation in hardware systems, software development, database management, and system design</li>
       </ul>
     </div>
   </div>
+</div>
 </section>
 
-<div class="section-divider"></div>
+<hr class="divider">
 
-<!-- CONTACT -->
-<section id="contact" style="background: var(--ink); max-width: 100%; padding: 6rem 0;">
-  <div style="max-width: 700px; margin: 0 auto; padding: 0 3rem; text-align: center;">
-    <div class="section-label" style="color: #2d9b5a; justify-content: center; display: flex;">// let's connect</div>
-    <div class="section-title" style="color: white; margin-bottom: 1rem;">Open to New Roles &amp; Collaborations</div>
-    <p style="color: #6b7280; font-size: 0.95rem; max-width: 480px; margin: 0 auto 1rem;">
-      Whether you have a backend challenge, a full-stack project, or just want to talk .NET — I'd love to hear from you.
-    </p>
-    <div class="contact-grid">
-      <a href="mailto:okechukwumitchell32@gmail.com" class="contact-link">
-        <span class="contact-icon">✉</span> Email Me
-      </a>
-      <a href="https://linkedin.com/in/okechukwu-ogbuabor" target="_blank" class="contact-link">
-        <span class="contact-icon">in</span> LinkedIn
-      </a>
-      <a href="https://github.com/Okechukwu-Mitchell" target="_blank" class="contact-link">
-        <span class="contact-icon">⌥</span> GitHub
-      </a>
-      <a href="tel:+2348032110372" class="contact-link">
-        <span class="contact-icon">☎</span> +234 803 211 0372
-      </a>
+<!-- ACHIEVEMENTS -->
+<section id="achievements" style="position:relative;z-index:1">
+<div class="wrap">
+  <div class="sec-label">// highlights</div>
+  <div class="sec-title">Key Achievements</div>
+  <div class="ach-grid">
+    <div class="ach-card">
+      <div class="ach-icon">🚀</div>
+      <div class="ach-text">
+        <h4>5 Live Production Products</h4>
+        <p>Successfully delivered and maintained 5 real SaaS products currently serving paying customers across the UK and globally.</p>
+      </div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-icon">🧾</div>
+      <div class="ach-text">
+        <h4>UK Tax Automation</h4>
+        <p>Built automated VAT/tax engines in Garage King and ForkLiftPro — eliminating manual errors and saving clients significant processing time.</p>
+      </div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-icon">⚡</div>
+      <div class="ach-text">
+        <h4>Performance Optimisation</h4>
+        <p>Reduced application load times through deep database query optimisation on the UNN FVM Alumni platform, improving user experience at scale.</p>
+      </div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-icon">🔗</div>
+      <div class="ach-text">
+        <h4>Xero Accounting Integration</h4>
+        <p>Implemented full two-way Xero integration across ForkLiftPro and ElevateX-PRO — seamless invoice syncing with zero manual re-entry.</p>
+      </div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-icon">📱</div>
+      <div class="ach-text">
+        <h4>Mobile Field Engineering Tools</h4>
+        <p>Built mobile-first job sheets, digital signatures, geo-location tracking, and time clock features empowering field engineers on-site.</p>
+      </div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-icon">👨‍💻</div>
+      <div class="ach-text">
+        <h4>Mentored Junior Developers</h4>
+        <p>Guided junior team members on C# best practices, testing strategies, deployment pipelines, and clean architecture at Bivisoft Limited.</p>
+      </div>
     </div>
   </div>
+</div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<section id="contact" style="position:relative;z-index:1;background:var(--ink);padding:6rem 0">
+<div class="wrap">
+  <div class="contact-inner">
+    <div class="sec-label">// let's connect</div>
+    <div class="sec-title">Open to Roles &amp; Collaborations</div>
+    <p class="contact-sub">Have a backend challenge, a SaaS product to build, or want to talk .NET? I'd love to hear from you.</p>
+    <div class="contact-links">
+      <a href="mailto:okechukwumitchell32@gmail.com" class="clink"><span class="clink-icon">✉</span>okechukwumitchell32@gmail.com</a>
+      <a href="https://linkedin.com/in/okechukwu-ogbuabor" target="_blank" class="clink"><span class="clink-icon">in</span>LinkedIn</a>
+      <a href="https://github.com/Okechukwu-Mitchell" target="_blank" class="clink"><span class="clink-icon">⌥</span>GitHub</a>
+      <a href="tel:+2348032110372" class="clink"><span class="clink-icon">☎</span>+234 803 211 0372</a>
+    </div>
+  </div>
+</div>
 </section>
 
 <footer>
-  &lt;/&gt; crafted by Okechukwu Mitchell Ogbuabor · Lagos, Nigeria · 2025
+  &lt;/&gt; Okechukwu Mitchell Ogbuabor · Lagos, Nigeria · ASP.NET Core Developer · 2025
 </footer>
 
+<script>
+// Stagger hero animation
+document.querySelector('.hero-left').style.cssText='animation:slideUp .7s ease both;opacity:0';
+const style=document.createElement('style');
+style.textContent='@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}';
+document.head.appendChild(style);
+
+// Responsive duo row
+function fixDuoRow(){
+  const duo=document.querySelector('.duo-row');
+  if(!duo)return;
+  if(window.innerWidth<960){duo.style.gridTemplateColumns='1fr'}
+  else{duo.style.gridTemplateColumns='1fr 1fr'}
+}
+fixDuoRow();
+window.addEventListener('resize',fixDuoRow);
+</script>
 </body>
 </html>
