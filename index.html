@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okechukwu Mitchell Ogbuabor — .NET Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #0d1117;
+    --ink-soft: #3a3d42;
+    --ink-muted: #6b7280;
+    --surface: #f9f8f4;
+    --surface-2: #f0ede6;
+    --accent: #1a6b3c;
+    --accent-light: #e8f5ee;
+    --accent-mid: #2d9b5a;
+    --gold: #c9963a;
+    --gold-light: #fdf4e3;
+    --line: rgba(0,0,0,0.08);
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Outfit', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--surface);
+    color: var(--ink);
+    line-height: 1.6;
+    font-weight: 400;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 3rem;
+    background: rgba(249,248,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--ink-muted);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 3rem;
+    padding-top: 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+    gap: 4rem;
+  }
+  .hero-text { padding-top: 2rem; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--accent-light);
+    color: var(--accent);
+    border: 1px solid rgba(26,107,60,0.2);
+    border-radius: 2rem;
+    padding: 0.35rem 1rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 1.8rem;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent-mid);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.4rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    border-radius: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.22s;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    border: 2px solid var(--accent);
+  }
+  .btn-primary:hover { background: #145530; border-color: #145530; transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border: 2px solid var(--line);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Hero right: terminal card */
+  .hero-visual {
+    display: flex; flex-direction: column; gap: 1.5rem;
+    animation: floatIn 0.8s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  @keyframes floatIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .terminal {
+    background: #0d1117;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.18);
+  }
+  .terminal-bar {
+    background: #161b22;
+    padding: 0.7rem 1.2rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-red { background: #ff5f57; }
+  .dot-yellow { background: #ffbd2e; }
+  .dot-green { background: #28c840; }
+  .terminal-title {
+    flex: 1; text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+  .terminal-body {
+    padding: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.9;
+    color: #e6edf3;
+  }
+  .t-prompt { color: #2d9b5a; }
+  .t-cmd { color: #79c0ff; }
+  .t-comment { color: #6e7681; }
+  .t-string { color: #a5d6ff; }
+  .t-value { color: #ffa657; }
+  .t-cursor {
+    display: inline-block;
+    width: 2px; height: 1em;
+    background: #e6edf3;
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* stat chips */
+  .stat-chips {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+  }
+  .chip {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    padding: 1rem 1.2rem;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .chip-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .chip-label {
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    margin-top: 0.3rem;
+  }
+
+  /* ── SECTIONS ── */
+  section { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    color: var(--ink);
+    margin-bottom: 3.5rem;
+    line-height: 1.2;
+  }
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--line);
+    margin: 0 auto;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.8rem;
+  }
+  .project-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 1.2rem;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: default;
+  }
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.10);
+  }
+  .project-card.featured {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .card-visual {
+    height: 200px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card.featured .card-visual { height: 100%; min-height: 240px; }
+  .cv-vet { background: linear-gradient(135deg, #e8f5ee 0%, #c8ecd9 100%); }
+  .cv-garage { background: linear-gradient(135deg, #fdf4e3 0%, #fae8c0 100%); }
+  .cv-alumni { background: linear-gradient(135deg, #e8eef8 0%, #c8d8f0 100%); }
+  .cv-flt { background: linear-gradient(135deg, #f5e8f8 0%, #e4c8f0 100%); }
+  .card-icon {
+    font-size: 4rem;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.12));
+  }
+  .card-body { padding: 1.6rem; }
+  .project-card.featured .card-body { padding: 2rem 2.2rem; display: flex; flex-direction: column; justify-content: center; }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+  .tag {
+    padding: 0.2rem 0.7rem;
+    border-radius: 2rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .tag-green { background: var(--accent-light); color: var(--accent); }
+  .tag-gold { background: var(--gold-light); color: var(--gold); }
+  .tag-blue { background: #e8eef8; color: #2558a7; }
+  .tag-purple { background: #f0e8f8; color: #6b2fa7; }
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .project-card.featured .card-title { font-size: 1.8rem; }
+  .card-url {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+    text-decoration: none;
+  }
+  .card-desc {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    margin-bottom: 1.2rem;
+  }
+  .card-bullets {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+  .card-bullets li {
+    font-size: 0.83rem;
+    color: var(--ink-soft);
+    display: flex; align-items: flex-start; gap: 0.5rem;
+  }
+  .card-bullets li::before {
+    content: '→';
+    color: var(--accent);
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 0.05em;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: #0d1117; }
+  #skills .section-label { color: #2d9b5a; }
+  #skills .section-title { color: white; }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-group {
+    background: #161b22;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 1rem;
+    padding: 1.5rem;
+  }
+  .skill-group-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #2d9b5a;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-family: var(--font-mono);
+  }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-pill {
+    padding: 0.35rem 0.85rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 0.4rem;
+    font-size: 0.82rem;
+    color: #e6edf3;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .skill-pill:hover {
+    background: rgba(45,155,90,0.15);
+    border-color: rgba(45,155,90,0.4);
+    color: #2d9b5a;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding-left: 2.5rem; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--line);
+  }
+  .tl-item {
+    position: relative;
+    padding-bottom: 3rem;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -2.5rem;
+    top: 0.3rem;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-light);
+    margin-left: -5px;
+  }
+  .tl-date {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+  .tl-role {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+  .tl-company {
+    font-size: 0.88rem;
+    color: var(--ink-muted);
+    margin-bottom: 0.8rem;
+  }
+  .tl-points { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+  .tl-points li {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    padding-left: 1.1rem;
+    position: relative;
+  }
+  .tl-points li::before {
+    content: '▸';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: 0.7rem;
+    top: 0.15em;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--ink);
+    color: white;
+    text-align: center;
+  }
+  #contact .section-title { color: white; }
+  .contact-grid {
+    display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap;
+    margin-top: 2.5rem;
+  }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 0.6rem;
+    padding: 0.85rem 1.5rem;
+    text-decoration: none;
+    color: white;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .contact-link:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .contact-icon { font-size: 1.1rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.78rem;
+    color: #6b7280;
+    font-family: var(--font-mono);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 2.5rem; }
+    .hero-visual { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+    .project-card.featured .card-visual { min-height: 180px; }
+    .stat-chips { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">mitchell.dev</span>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:okechukwumitchell32@gmail.com" class="btn btn-primary" style="padding: 0.6rem 1.4rem; font-size: 0.82rem;">
+    Hire Me
+  </a>
+</nav>
+
+<!-- HERO -->
+<div style="max-width: 1200px; margin: 0 auto;">
+  <div class="hero">
+    <div class="hero-text">
+      <div class="hero-tag">Available for opportunities</div>
+      <h1>Building the web with <em>precision</em> & purpose</h1>
+      <p class="hero-sub">
+        Hi, I'm <strong>Mitchell</strong> — an ASP.NET Core developer with 3+ years shipping production software across veterinary, automotive, and logistics industries. I turn complex backend challenges into clean, scalable solutions.
+      </p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn btn-primary">View My Work</a>
+        <a href="https://github.com/Okechukwu-Mitchell" target="_blank" class="btn btn-outline">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <div class="terminal-title">developer.cs</div>
+        </div>
+        <div class="terminal-body">
+          <div><span class="t-comment">// Okechukwu Mitchell Ogbuabor</span></div>
+          <div><span class="t-cmd">var</span> developer = <span class="t-cmd">new</span> {</div>
+          <div>&nbsp;&nbsp;Name = <span class="t-string">"Mitchell"</span>,</div>
+          <div>&nbsp;&nbsp;Role = <span class="t-string">"ASP.NET Core Dev"</span>,</div>
+          <div>&nbsp;&nbsp;Experience = <span class="t-value">3</span>,<span class="t-comment"> // years</span></div>
+          <div>&nbsp;&nbsp;Stack = <span class="t-cmd">new</span>[] {</div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-string">"C#"</span>, <span class="t-string">"ASP.NET Core"</span>,</div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-string">"SQL Server"</span>, <span class="t-string">"EF Core"</span>,</div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-string">"Web API"</span>, <span class="t-string">"JavaScript"</span></div>
+          <div>&nbsp;&nbsp;},</div>
+          <div>&nbsp;&nbsp;Location = <span class="t-string">"Lagos, Nigeria"</span>,</div>
+          <div>&nbsp;&nbsp;Status = <span class="t-string">"Open to work"</span> ✓</div>
+          <div>};<span class="t-cursor"></span></div>
+        </div>
+      </div>
+      <div class="stat-chips">
+        <div class="chip">
+          <div class="chip-num">3+</div>
+          <div class="chip-label">Years Exp.</div>
+        </div>
+        <div class="chip">
+          <div class="chip-num">4</div>
+          <div class="chip-label">Live Products</div>
+        </div>
+        <div class="chip">
+          <div class="chip-num">3</div>
+          <div class="chip-label">Industries</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">// selected work</div>
+  <div class="section-title">Projects I've Shipped</div>
+
+  <div class="projects-grid">
+    <!-- Featured -->
+    <div class="project-card featured">
+      <div class="card-visual cv-vet">
+        <div class="card-icon">🐾</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag tag-green">ASP.NET Core</span>
+          <span class="tag tag-blue">Entity Framework</span>
+          <span class="tag tag-gold">SQL Server</span>
+          <span class="tag tag-green">Featured</span>
+        </div>
+        <div class="card-title">VetMan</div>
+        <a href="https://vetman.ng" target="_blank" class="card-url">vetman.ng ↗</a>
+        <p class="card-desc">A global veterinary practice management system streamlining clinic operations end-to-end — from appointments to billing to inventory.</p>
+        <ul class="card-bullets">
+          <li>Appointment scheduling & patient record management with real-time dashboards</li>
+          <li>Third-party payment API integration for billing workflows</li>
+          <li>Inventory tracking & reporting engine with performance-optimised queries</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Garage King -->
+    <div class="project-card">
+      <div class="card-visual cv-garage">
+        <div class="card-icon">🔧</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag tag-gold">ASP.NET MVC</span>
+          <span class="tag tag-blue">Bootstrap</span>
+          <span class="tag tag-green">UK Tax Engine</span>
+        </div>
+        <div class="card-title">Garage King</div>
+        <a href="https://garageking.uk" target="_blank" class="card-url">garageking.uk ↗</a>
+        <p class="card-desc">Complete management suite for UK garages with scheduling, invoicing, and automated VAT calculations.</p>
+        <ul class="card-bullets">
+          <li>Tax engine automating VAT computation — eliminating manual errors</li>
+          <li>Real-time stock updates & resource allocation</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- FLT -->
+    <div class="project-card">
+      <div class="card-visual cv-flt">
+        <div class="card-icon">🏭</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag tag-purple">ASP.NET Core</span>
+          <span class="tag tag-gold">jQuery</span>
+          <span class="tag tag-blue">UK Compliance</span>
+        </div>
+        <div class="card-title">FLT Software</div>
+        <a href="https://forkliftprosoft.co.uk" target="_blank" class="card-url">forkliftprosoft.co.uk ↗</a>
+        <p class="card-desc">Enterprise solution for UK forklift businesses featuring scheduling, invoicing, emailing, and tax compliance.</p>
+        <ul class="card-bullets">
+          <li>Automated tax calculation meeting UK regulatory standards</li>
+          <li>Optimized API endpoints for system stability</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Alumni -->
+    <div class="project-card" style="grid-column: span 2;">
+      <div style="display: grid; grid-template-columns: 280px 1fr;">
+        <div class="card-visual cv-alumni" style="height: 100%; min-height: 200px;">
+          <div class="card-icon">🎓</div>
+        </div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="tag tag-blue">Web API</span>
+            <span class="tag tag-green">SQL Server</span>
+            <span class="tag tag-gold">Rich Text</span>
+          </div>
+          <div class="card-title">UNN FVM Alumni Portal</div>
+          <a href="https://alumni.bivisoft.com" target="_blank" class="card-url">alumni.bivisoft.com ↗</a>
+          <p class="card-desc">A membership platform for the University of Nigeria's Faculty of Veterinary Medicine alumni, handling memberships, payments, blogging, and events.</p>
+          <ul class="card-bullets">
+            <li>Membership registration & payment via Web API backend</li>
+            <li>Blogging module with rich text editing, boosting user engagement</li>
+            <li>DB query optimisation reducing load times significantly</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background: #0d1117; max-width: 100%; padding: 6rem 0;">
+  <div style="max-width: 1100px; margin: 0 auto; padding: 0 3rem;">
+    <div class="section-label">// technical stack</div>
+    <div class="section-title">What I Work With</div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-pills">
+          <span class="skill-pill">C#</span>
+          <span class="skill-pill">JavaScript</span>
+          <span class="skill-pill">HTML</span>
+          <span class="skill-pill">CSS</span>
+          <span class="skill-pill">SQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Frameworks</div>
+        <div class="skill-pills">
+          <span class="skill-pill">ASP.NET Core</span>
+          <span class="skill-pill">MVC</span>
+          <span class="skill-pill">Web API</span>
+          <span class="skill-pill">Entity Framework</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Frontend</div>
+        <div class="skill-pills">
+          <span class="skill-pill">jQuery</span>
+          <span class="skill-pill">Bootstrap</span>
+          <span class="skill-pill">Responsive UI</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Database & Tools</div>
+        <div class="skill-pills">
+          <span class="skill-pill">SQL Server</span>
+          <span class="skill-pill">Git</span>
+          <span class="skill-pill">NPM</span>
+          <span class="skill-pill">Visual Studio</span>
+          <span class="skill-pill">VS Code</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">// career timeline</div>
+  <div class="section-title">Experience & Education</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">Jan 2023 – Present</div>
+      <div class="tl-role">ASP.NET Developer / Software Engineer</div>
+      <div class="tl-company">Bivisoft Limited · Enugu, Nigeria</div>
+      <ul class="tl-points">
+        <li>Designed, developed, and maintained web applications for veterinary, automotive, and logistics sectors</li>
+        <li>Optimised application performance, reducing response times for key features</li>
+        <li>Integrated third-party APIs for payment processing and external services</li>
+        <li>Mentored junior developers on best practices in coding, testing, and deployment</li>
+        <li>Conducted unit testing, debugging, and system maintenance for high-quality deliverables</li>
+      </ul>
+    </div>
+    <div class="tl-item" style="padding-bottom: 0;">
+      <div class="tl-date">Feb 2014 – Nov 2018</div>
+      <div class="tl-role">B.Eng in Computer Engineering</div>
+      <div class="tl-company">Michael Okpara University of Agriculture · Umudike, Nigeria</div>
+      <ul class="tl-points">
+        <li>Final-year project: Grain Moisture Detection System — integrated hardware sensors with an ASP.NET + SQL Server web interface</li>
+        <li>Foundation in hardware systems, software development, database management, and system design</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONTACT -->
+<section id="contact" style="background: var(--ink); max-width: 100%; padding: 6rem 0;">
+  <div style="max-width: 700px; margin: 0 auto; padding: 0 3rem; text-align: center;">
+    <div class="section-label" style="color: #2d9b5a; justify-content: center; display: flex;">// let's connect</div>
+    <div class="section-title" style="color: white; margin-bottom: 1rem;">Open to New Roles &amp; Collaborations</div>
+    <p style="color: #6b7280; font-size: 0.95rem; max-width: 480px; margin: 0 auto 1rem;">
+      Whether you have a backend challenge, a full-stack project, or just want to talk .NET — I'd love to hear from you.
+    </p>
+    <div class="contact-grid">
+      <a href="mailto:okechukwumitchell32@gmail.com" class="contact-link">
+        <span class="contact-icon">✉</span> Email Me
+      </a>
+      <a href="https://linkedin.com/in/okechukwu-ogbuabor" target="_blank" class="contact-link">
+        <span class="contact-icon">in</span> LinkedIn
+      </a>
+      <a href="https://github.com/Okechukwu-Mitchell" target="_blank" class="contact-link">
+        <span class="contact-icon">⌥</span> GitHub
+      </a>
+      <a href="tel:+2348032110372" class="contact-link">
+        <span class="contact-icon">☎</span> +234 803 211 0372
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &lt;/&gt; crafted by Okechukwu Mitchell Ogbuabor · Lagos, Nigeria · 2025
+</footer>
+
+</body>
+</html>
